@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Journey of Self</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    line-height: 1.7;
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #1e3a5f;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.navbar a:hover {
+    color: #3a6ea5;
+}
+
+/* HEADER */
+.header {
+    position: relative;
+    background: linear-gradient(135deg, #1e3a5f, #3a6ea5);
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    overflow: hidden;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+/* NAME */
+.name {
+    margin-top: 15px;
+    font-weight: 300;
+    font-size: 16px;
+    opacity: 0.85;
+}
+
+/* PARTICLES */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* CONTAINER */
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+/* SECTIONS */
+h2 {
+    border-bottom: 2px solid #3a6ea5;
+    padding-bottom: 10px;
+    margin-top: 50px;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* MANIFESTO */
+.highlight p {
+    font-weight: 600;
+}
+
+/* ANIMATIONS */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 28px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+    }
+}
+
+/* ===== FIGURE CAPTIONS ===== */
+.fig-caption {
+    text-align: center;
+    font-size: 12.5px;
+    color: #6b7c93;
+    margin-top: 10px;
+    font-style: italic;
+    letter-spacing: 0.3px;
+}
+
+/* ===== FIGURE 1: CONFIDENCE TIMELINE ===== */
+.timeline-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 30px 24px 20px;
+    margin-top: 28px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.timeline-track {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 10px;
+}
+
+.timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    background: linear-gradient(90deg, #3a6ea5, #1e3a5f);
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.timeline-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    cursor: default;
+}
+
+.timeline-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #3a6ea5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.timeline-dot span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3a6ea5;
+    display: block;
+    transition: background 0.3s;
+}
+
+.timeline-point:hover .timeline-dot {
+    background: #3a6ea5;
+    transform: scale(1.15);
+}
+
+.timeline-point:hover .timeline-dot span {
+    background: white;
+}
+
+.timeline-label {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.timeline-label strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e3a5f;
+}
+
+.timeline-label span {
+    font-size: 11.5px;
+    color: #5a7a99;
+    font-weight: 300;
+    display: block;
+    margin-top: 3px;
+}
+
+@media (max-width: 500px) {
+    .timeline-track::before { display: none; }
+    .timeline-track { flex-direction: column; align-items: center; gap: 18px; }
+    .timeline-point { flex-direction: row; gap: 12px; justify-content: flex-start; width: 100%; }
+    .timeline-label { text-align: left; margin-top: 0; }
+}
+
+/* ===== FIGURE 2: PERSONALITY SPLIT ===== */
+.split-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 24px 20px;
+    margin-top: 28px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.split-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.split-card {
+    flex: 1;
+    border-radius: 10px;
+    padding: 18px 16px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+}
+
+.split-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(58,110,165,0.15);
+}
+
+.split-card.intro {
+    background: #eef3fa;
+    border-left: 4px solid #3a6ea5;
+}
+
+.split-card.extro {
+    background: #f0f6ff;
+    border-left: 4px solid #1e3a5f;
+}
+
+.split-card h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e3a5f;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.split-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13px;
+    color: #3d5a7a;
+    line-height: 1.8;
+}
+
+@media (max-width: 500px) {
+    .split-container { flex-direction: column; }
+}
+
+/* ===== FIGURE 3: SELF VS OTHERS ===== */
+.compare-wrapper {
+    background: white;
+    border-radius: 12px;
+    padding: 28px 24px 20px;
+    margin-top: 28px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.compare-grid {
+    display: flex;
+    gap: 16px;
+    margin-top: 4px;
+}
+
+.compare-col {
+    flex: 1;
+    border-radius: 10px;
+    padding: 18px 16px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+}
+
+.compare-col:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(58,110,165,0.15);
+}
+
+.compare-col.self-col {
+    background: #eef3fa;
+    border-top: 4px solid #3a6ea5;
+}
+
+.compare-col.others-col {
+    background: #f0f6ff;
+    border-top: 4px solid #1e3a5f;
+}
+
+.compare-col h4 {
+    margin: 0 0 12px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1e3a5f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.compare-col ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13px;
+    color: #3d5a7a;
+    line-height: 2;
+}
+
+.compare-col ul li span.source {
+    font-size: 11px;
+    color: #8aa5c0;
+    margin-left: 4px;
+    font-style: italic;
+}
+
+@media (max-width: 500px) {
+    .compare-grid { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <a href="#part1">Self</a>
+    <a href="#part2">Perception</a>
+    <a href="#manifesto">Manifesto</a>
+    <a href="#health">Health</a>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+    <canvas id="particles"></canvas>
+
+    <div class="header-content fade-in">
+        <h1>My Journey of Self</h1>
+        <p>Understanding, Growth, and Identity</p>
+        <div class="name">Nathaniel Escaño</div>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- PART 1 -->
+<h2 id="part1" class="fade-in">Part 1: My Process of Self-Construction</h2>
+
+<p class="fade-in-delay">
+My understanding of the self has developed gradually through my experiences, environment, and personal reflections. Looking back, my earliest memory of self-awareness was during my elementary years, around Grade 2, when I began to notice how shy I was in different situations. At that time, I considered myself a loner and an introverted child. I did not have friends outside of my home and mostly interacted only with my family, especially my brother. This early stage of my life shaped my initial notion of myself as someone reserved and socially distant.
+</p>
+
+<p class="fade-in-delay">
+As I progressed from elementary to high school, my environment began to influence my development. Being accepted into Muntinlupa Science High School placed me in a more competitive and academically demanding setting. This pushed me to improve myself, not only academically but also socially. Although I gained some confidence and developed friendships within my class, I still struggled with shyness and introversion. Confidence remained my biggest challenge, and I often found it difficult to fully express myself despite being surrounded by peers.
+</p>
+
+<p class="fade-in-delay">
+Now, as a college student at UPLB, I can see significant growth in my sense of self. I have become more competent and more confident compared to my younger self. I have built meaningful friendships, even participating in competitions with them, and I have begun to take on small leadership roles. While I still consider myself an introvert, I have learned to adapt to different environments, which I see as one of my strengths. However, I also recognize that I tend to overthink, which may stem from my earlier experiences of being highly introverted.
+</p>
+
+<!-- FIGURE 1: Confidence Development Timeline -->
+<div class="timeline-wrapper">
+    <div class="timeline-track">
+        <div class="timeline-point">
+            <div class="timeline-dot"><span></span></div>
+            <div class="timeline-label">
+                <strong>Elementary</strong>
+                <span>Very shy</span>
+                <span>Social loner</span>
+            </div>
+        </div>
+        <div class="timeline-point">
+            <div class="timeline-dot"><span></span></div>
+            <div class="timeline-label">
+                <strong>High School</strong>
+                <span>Slight confidence</span>
+                <span>Growing friendships</span>
+            </div>
+        </div>
+        <div class="timeline-point">
+            <div class="timeline-dot"><span></span></div>
+            <div class="timeline-label">
+                <strong>College</strong>
+                <span>More confident</span>
+                <span>Leadership roles</span>
+            </div>
+        </div>
+    </div>
+    <p class="fig-caption">Figure 1. Confidence Development Over Time</p>
+</div>
+
+<p class="fade-in-delay">
+From a biological and social perspective, I believe my personality has been influenced by both innate traits and the expectations placed on me growing up. Being raised with the idea that a man should be strong and responsible shaped how I approach challenges and responsibilities. In terms of body image, I struggled with low self-esteem during childhood up until before college. Over time, however, I have become less concerned about how I look, although I still make efforts to improve myself physically, such as going to the gym.
+</p>
+
+<p class="fade-in-delay">
+In terms of personality, I identify as an introvert, particularly in unfamiliar environments. However, I become more expressive and outgoing when I am with people I trust. My identity development has been relatively stable in terms of my gender and sexuality, as I have consistently identified myself as a straight male. Meanwhile, my cultural background as a Filipino has instilled in me strong family-oriented values. When dealing with stress, I often turn to simple coping mechanisms such as watching anime or sleeping.
+</p>
+
+<!-- FIGURE 2: Personality Split Diagram -->
+<div class="split-wrapper">
+    <div class="split-container">
+        <div class="split-card intro">
+            <h4>Introvert</h4>
+            <ul>
+                <li>Unfamiliar people</li>
+                <li>Reserved &amp; quiet</li>
+                <li>Guarded in new settings</li>
+            </ul>
+        </div>
+        <div class="split-card extro">
+            <h4>Extrovert</h4>
+            <ul>
+                <li>Close friends &amp; family</li>
+                <li>Expressive &amp; outgoing</li>
+                <li>Open and engaged</li>
+            </ul>
+        </div>
+    </div>
+    <p class="fig-caption">Figure 2. Context-Dependent Personality Expression</p>
+</div>
+
+<p class="fade-in-delay">
+Overall, I believe that my sense of self is relatively stable in terms of my personality and personal identity. However, I am still in the process of discovering who I am when it comes to my future career and long-term direction. This shows that self-construction is an ongoing process.
+</p>
+
+
+<!-- PART 2 -->
+<h2 id="part2" class="fade-in">Part 2: How Others See Me</h2>
+
+<div class="card fade-in">
+    <h3>Lance's Perspective</h3>
+    <p><i>"Outgoing, extroverted, and easy to talk to."</i></p>
+</div>
+
+<div class="card fade-in">
+    <h3>Earl's Perspective</h3>
+    <p><i>"Reliable and capable of leadership."</i></p>
+</div>
+
+<p class="fade-in-delay2">
+To gain a better understanding of how others perceive me, I interviewed two of my close friends, Lance
+and Earl. Their responses provided insights that both surprised me and helped me reflect more deeply
+on my own self-perception.
+</p>
+<p class="fade-in-delay2">
+Lance described me as an outgoing and extroverted person who is easy to talk to. This perspective was
+unexpected, as I have always seen myself as more timid and introverted. I tend to feel reserved,
+especially in unfamiliar situations, and I do not usually consider myself naturally outgoing. However,
+hearing Lance’s impression made me realize that I may project a more approachable and sociable image
+than I am consciously aware of. It suggests that while I may feel introverted internally, my behavior in
+social settings allows others to see me differently.
+</p>
+<p class="fade-in-delay2">
+Earl, who is also my groupmate in an academic project, described me as reliable and capable of taking on
+leadership roles. In the past, I often avoided leadership positions and preferred to stay in the
+background. However, this past semester, I have started to take more initiative when working in groups.
+Although I do not always see myself as a leader, Earl’s perspective made me recognize that leadership
+can be shown through responsibility, initiative, and consistency rather than just authority. I felt proud
+knowing that he trusts my abilities.
+</p>
+<p class="fade-in-delay2">
+Overall, these interviews revealed a gap between how I see myself and how others perceive me. They
+highlighted qualities I had overlooked and showed that my identity is not only shaped by my own
+perspective but also by the way others experience me.
+</p>
+
+<!-- FIGURE 3: Self vs Others Perception -->
+<div class="compare-wrapper">
+    <div class="compare-grid">
+        <div class="compare-col self-col">
+            <h4>Self-Perception</h4>
+            <ul>
+                <li>Introverted</li>
+                <li>Timid &amp; reserved</li>
+                <li>Not a natural leader</li>
+            </ul>
+        </div>
+        <div class="compare-col others-col">
+            <h4>Others' Perception</h4>
+            <ul>
+                <li>Extroverted <span class="source">(Lance)</span></li>
+                <li>Easy to talk to <span class="source">(Lance)</span></li>
+                <li>Reliable leader <span class="source">(Earl)</span></li>
+            </ul>
+        </div>
+    </div>
+    <p class="fig-caption">Figure 3. Self vs Others' Perception</p>
+</div>
+
+<!-- PERSONAL MANIFESTO -->
+<h2 id="manifesto" class="fade-in">My Personal Manifesto</h2>
+
+<div class="card highlight fade-in">
+    <p>I choose growth over comfort.</p>
+    <p>I define myself through action, not doubt.</p>
+    <p>I will step outside my comfort zone.</p>
+    <p>I will not let overthinking control me.</p>
+    <p>I value meaningful relationships.</p>
+    <p>I accept uncertainty as part of growth.</p>
+</div>
+
+<!-- HEALTH -->
+<h2 id="health" class="fade-in">My Health Manifesto</h2>
+
+<div class="card fade-in">
+    <h3>Physical</h3>
+    <p>I will stay consistent in exercise and rest.</p>
+
+    <h3>Mental</h3>
+    <p>I will manage overthinking and allow rest.</p>
+
+    <h3>Emotional</h3>
+    <p>I will practice self-acceptance.</p>
+
+    <h3>Social</h3>
+    <p>I will maintain meaningful relationships.</p>
+</div>
+
+</div>
+
+<!-- PARTICLES SCRIPT -->
+<script>
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = 300;
+
+let particlesArray = [];
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2;
+        this.speedX = Math.random() * 0.5 - 0.25;
+        this.speedY = Math.random() * 0.5 - 0.25;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+    }
+    draw() {
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function init() {
+    for (let i = 0; i < 80; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+init();
+animate();
+</script>
+
+</body>
+</html>
